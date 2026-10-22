@@ -203,9 +203,6 @@ class MCPSessionManager {
     this.connectionPromise = null
     this.toolsCache = null
 
-    if (this.keepalive) {
-      clearInterval(this.keepalive)
-    }
   }
 
   /**
@@ -273,6 +270,11 @@ class MCPSessionManager {
       throw new Error("MCP client not initialized")
     }
 
+    // MCP arguments are an object (or omitted), never an array or scalar.
+    const argumentsObject = args === undefined
+      ? undefined
+      : z.record(z.unknown()).parse(args)
+
     const abortController = options.abortSignal
       ? new AbortController()
       : new AbortController()
@@ -296,7 +298,7 @@ class MCPSessionManager {
       // Execute the tool using the SDK
       const result = await this.client.callTool({
         name,
-        arguments: args,
+        arguments: argumentsObject,
       })
 
       // Clear timeout if it was set
