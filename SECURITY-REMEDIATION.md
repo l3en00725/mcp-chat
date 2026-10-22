@@ -18,6 +18,6 @@ Corrected local advisory matching finds 0 critical, 2 high, 4 moderate and 3 low
 
 ## Release and rollback
 
-This draft is not release-ready. Resolve the standalone type errors and lint setup, complete the owning AI migration or an explicit reviewed exposure decision, and test authentication, upload and synthetic chat/artifact flows in an isolated preview. Rebuild the container and attest actual deployed Node/framework/SDK versions after separate release approval.
+This draft is not release-ready. The production build also warns that JOSE references CompressionStream/DecompressionStream unsupported in Edge; authentication/middleware behavior needs isolated runtime acceptance. Anonymous built-server login/health smoke is not yet complete. Resolve the standalone type errors and lint setup, complete the owning AI migration or an explicit reviewed exposure decision, and test authentication, upload and synthetic chat/artifact flows in an isolated preview. Rebuild the container and attest actual deployed Node/framework/SDK versions after separate release approval.
 
 Branch CI or automatic previews may run; no production release is authorized by this change. Release a reviewed pinned commit through normal CI only after the gates pass. Rollback restores the previous artifact and reverts manifests, lock, Docker/client/theme changes together; avoid executing the old build command's database push during rollback. No database migration is part of this patch.
